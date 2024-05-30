@@ -1,0 +1,22 @@
+{
+  "name": "jadenexpress",
+  "version": "1.0.0",
+  "description": "my installation of express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HigherHelp/api.git"
+  },
+  "author": "jaden hinton",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HigherHelp/api/issues"
+  },
+  "homepage": "https://github.com/HigherHelp/api#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
