@@ -3,8 +3,13 @@
   "version": "1.0.0",
   "description": "An app for making money as a college student",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "dev": "yarn && nodemon -w .env -w . server.js",
+    "lint": "eslint --ext=.js --ignore-path=.gitignore src",
+    "lint:fix": "yarn run lint --fix",
+    "format": "prettier --write --ignore-path=.gitignore \"src/**/*.{js,jsx}\""
   },
   "repository": {
     "type": "git",
@@ -17,7 +22,6 @@
   },
   "homepage": "https://github.com/HigherHelp/api#readme",
   "dependencies": {
-    "express": "^4.19.2",
-    "prisma": "^5.14.0"
+    "express": "^4.19.2"
   }
 }

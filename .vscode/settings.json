@@ -1,0 +1,89 @@
+{
+  "terminal.integrated.cursorStyle": "line",
+  "editor.semanticHighlighting.enabled": true,
+  "prettier.vueIndentScriptAndStyle": true,
+  "editor.smoothScrolling": true,
+  "workbench.list.smoothScrolling": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "prettier.tabWidth": 2,
+  "editor.mouseWheelScrollSensitivity": 0.2,
+  "workbench.list.mouseWheelScrollSensitivity": 0.2,
+  "terminal.integrated.mouseWheelScrollSensitivity": 0.2,
+  "editor.wordWrap": "on",
+  "editor.detectIndentation": false,
+  "editor.formatOnSaveMode": "modifications",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "explorer.confirmDragAndDrop": false,
+  "window.title": "${activeEditorLong}${separator}${rootName}",
+  "files.watcherExclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/build": true,
+    "**/dist": true,
+    "**/dist-*": true,
+    "**/tmp": true,
+    "**/i18n": true,
+    "**/config": true,
+    "**/.gradle": true,
+    "**/.eyeglass_cache": true
+  },
+  "search.exclude": {
+    "storybook-static": true,
+    "**/.factorypath": true,
+    "**/.vscode": true,
+    "**/.prettierrc": true,
+    "**/jsconfig.json": true,
+    "**/next.config.js": true,
+    "**/package.json": true,
+    "**/README.md": true,
+    "**/yarn.lock": true,
+    "**/.lintstagedrc.js": true,
+    "**/extensions.json": true,
+    "**/settings.json": true,
+    "**/.eslintrc.json": true,
+    "**/.gitignore": true
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.yarn": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/build": true,
+    "**/dist": true,
+    "**/dist-*": true,
+    "**/tmp": true,
+    "**/i18n": true,
+    "**/.gradle": true,
+    "**/.eyeglass_cache": true,
+    "**/_build": true,
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/*.swn": true,
+    "**/*.swp": true,
+    "**/*.swo": true
+  },
+  "workbench.startupEditor": "none",
+  "window.commandCenter": false,
+  "terminal.integrated.cursorBlinking": true,
+  "editor.fontLigatures": true,
+  "editor.fontFamily": "FiraCode-Retina, Menlo, Monaco, 'Courier New', monospace",
+  "files.trimTrailingWhitespace": true,
+  "editor.formatOnSave": true,
+  "editor.renderWhitespace": "boundary",
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "git.autofetch": true,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "explorer.compactFolders": false
+}
