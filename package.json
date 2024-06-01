@@ -1,7 +1,7 @@
 {
-  "name": "higher-help-api",
+  "name": "hireu-app-api",
   "version": "1.0.0",
-  "description": "my installation of express",
+  "description": "An app for making money as a college student",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/HigherHelp/api.git"
   },
-  "author": "jaden hinton",
+  "author": "kevin huang, jaden hinton",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/HigherHelp/api/issues"
