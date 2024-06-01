@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "esModuleInterop": true,
+    "moduleResolution": "nodenext",
+    "target": "ES2022",
+    "module": "NodeNext"
+  },
+  "include": ["src", "tests"],
+  "exclude": ["node_modules"]
+}
