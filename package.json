@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/HigherHelp/api#readme",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "prisma": "^5.14.0"
   }
 }
