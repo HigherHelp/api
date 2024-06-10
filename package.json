@@ -8,8 +8,9 @@
     "start": "node server.js",
     "dev": "yarn && nodemon -w .env -w . server.js",
     "lint": "eslint --ext=.js --ignore-path=.gitignore src",
-    "lint:fix": "yarn run lint --fix",
-    "format": "prettier --write --ignore-path=.gitignore \"src/**/*.{js,jsx}\""
+    "lint:fix": "yarn run lint --fix && yarn prisma format",
+    "format": "prettier --write --ignore-path=.gitignore \"src/**/*.{js,jsx}\"",
+    "db": "yarn prisma db push && yarn prisma studio"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
   },
   "homepage": "https://github.com/HigherHelp/api#readme",
   "dependencies": {
+    "@prisma/client": "^5.15.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -45,6 +47,7 @@
     "lint-staged": "^15.2.5",
     "nodemon": "^3.1.2",
     "prettier": "2.8.0",
+    "prisma": "^5.15.0",
     "simple-git-hooks": "^2.11.1"
   },
   "simple-git-hooks": {
