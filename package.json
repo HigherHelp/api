@@ -8,8 +8,8 @@
     "start": "node server.js",
     "dev": "yarn && nodemon -w .env -w . server.js",
     "lint": "eslint --ext=.js --ignore-path=.gitignore src",
-    "lint:fix": "yarn run lint --fix && yarn prisma format",
-    "format": "prettier --write --ignore-path=.gitignore \"src/**/*.{js,jsx}\"",
+    "lint:fix": "yarn run lint --fix",
+    "format": "prettier --write --ignore-path=.gitignore .",
     "db": "yarn prisma db push && yarn prisma studio"
   },
   "repository": {
@@ -29,6 +29,7 @@
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
     "lodash-es": "^4.17.21",
     "morgan": "^1.10.0",
     "winston": "^3.13.0"
@@ -52,7 +53,7 @@
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged",
-    "pre-push": "yarn run format",
+    "pre-push": "yarn run format && yarn prisma format",
     "post-merge": "yarn install"
   },
   "lint-staged": {

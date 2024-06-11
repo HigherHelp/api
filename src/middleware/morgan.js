@@ -6,7 +6,7 @@ const stream = {
 };
 
 function getFormat() {
-  return process.env.CURRENT_ENV === 'development' ? 'dev' : 'short';
+  return process.env.NODE_ENV === 'development' ? 'dev' : 'short';
 }
 
 export default morgan(getFormat(), { stream });

@@ -39,6 +39,7 @@ To get the server running locally:
 - `GET /sample/auth` - Throws an AuthenticationError
 
 If your server is running locally, you can test these routes by entering the URL in your browser:
+
 - `http://localhost:3001/sample`
 - `http://localhost:3001/sample/1`
 - `http://localhost:3001/sample/user`
