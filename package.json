@@ -54,7 +54,7 @@
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged",
     "pre-push": "yarn run format && yarn prisma format",
-    "post-merge": "yarn install"
+    "post-merge": "yarn install && yarn simple-git-hooks"
   },
   "lint-staged": {
     "*.{js,jsx}": "eslint --fix"
