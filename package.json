@@ -53,7 +53,7 @@
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged",
-    "pre-push": "yarn run format && yarn prisma format",
+    "pre-push": "yarn run format && yarn prisma format && git add . && git commit --amend --no-edit",
     "post-merge": "yarn install && yarn simple-git-hooks"
   },
   "lint-staged": {
