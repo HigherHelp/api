@@ -72,7 +72,7 @@
   "window.commandCenter": false,
   "terminal.integrated.cursorBlinking": true,
   "editor.fontLigatures": true,
-  "editor.fontFamily": "FiraCode-Retina, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "MesloLGS NF, FiraCode-Retina, Menlo, Monaco, 'Courier New', monospace",
   "files.trimTrailingWhitespace": true,
   "editor.formatOnSave": true,
   "editor.renderWhitespace": "boundary",
