@@ -25,11 +25,23 @@ router.get('/:id', async (request, response) => {
 
 //update user by id
 router.patch('/:id', async (request, response) => {
+  const check = request.params.id.split('-');
+  if (
+    check.length != 5 ||
+    check[0].length != 8 ||
+    check[1].length != 4 ||
+    check[2].length != 4 ||
+    check[3].length != 4 ||
+    check[4].length != 12
+  ) {
+    throw new RequestError('Invalid ID');
+  }
   const user = await prisma.user.findFirst({
     where: {
       id: request.params.id,
     },
   });
+
   if (!user) {
     throw new RequestError('User not found with id');
   }
