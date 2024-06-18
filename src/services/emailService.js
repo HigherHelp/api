@@ -12,7 +12,6 @@ let EMAIL_CLIENT;
 
 function setupClient() {
   if (!process.env.MAILGUN_API_KEY || !process.env.MAILGUN_DOMAIN) {
-    //use logger instead of console
     Logger.error(`
       Email Service: The following environment variables are required:
         - MAILGUN_API_KEY
@@ -33,12 +32,6 @@ function setupClient() {
 function isValidString(string) {
   return _.isString(string) && !_.isEmpty(string.trim());
 }
-
-// platform - API
-// Lnaguage - js
-// conventions  &best practices - libraries (lodash), validation (are parameters valid), good functions
-
-// function should always do one thing, only
 
 function validateText(text) {
   if (!isValidString(text)) {
@@ -61,7 +54,6 @@ function validateRecipient(to) {
   }
 }
 
-//always use async if using 'await'
 export async function sendEmail({ to, subject, text }) {
   validateSubject(subject);
   validateText(text);
