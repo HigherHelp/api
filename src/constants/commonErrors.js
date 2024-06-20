@@ -76,3 +76,11 @@ export class ValidationError extends Error {
   }
 }
 Object.freeze(ValidationError.prototype);
+
+export class EmailServiceError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'EmailServiceError';
+    this.statusCode = 500;
+  }
+}
