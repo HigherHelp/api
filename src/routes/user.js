@@ -1,31 +1,10 @@
 import express from 'express';
 import prisma from '../tools/prisma.js';
-import {
-  ArchivedError,
-  RequestError,
-  AuthenticationError,
-} from '../constants/commonErrors.js';
+import { RequestError } from '../constants/commonErrors.js';
+import _ from 'lodash';
 
 const router = express.Router();
 
-//welcomes users
-router.get('/', (request, response) => {
-  response.json({ message: 'Welcome!' });
-});
-
-router.get('/archived', () => {
-  throw new ArchivedError('This user has been archived');
-});
-
-router.get('/error', () => {
-  throw new RequestError('Request Error');
-});
-
-router.get('/auth', () => {
-  throw new AuthenticationError('Authentication Error');
-});
-
-//gets a user from id
 router.get('/:id', async (request, response, next) => {
   try {
     const user = await prisma.user.findUnique({
@@ -34,16 +13,20 @@ router.get('/:id', async (request, response, next) => {
       },
     });
     if (!user) {
-      throw new RequestError('User not found with ID');
+      throw new RequestError(`User not found with ID${request.params.id}`);
     }
-    response.json({ user });
+    const userAttributes = _.pick(user, [
+      'name',
+      'email',
+      'createdAt',
+      'updatedAt',
+    ]);
+    response.json({ userAttributes });
   } catch (error) {
     next(error);
-    return;
   }
 });
 
-//update user by id
 router.patch('/:id', async (request, response, next) => {
   try {
     const user = await prisma.user.findUnique({
@@ -52,28 +35,38 @@ router.patch('/:id', async (request, response, next) => {
       },
     });
     if (!user) {
-      throw new RequestError('User not found with ID');
+      throw new RequestError(`User not found with ID${request.params.id}`);
     }
-    //const updateName =
-    await prisma.user.update({
-      where: {
-        id: request.params.id,
-      },
-      data: {
-        name: request.body.name,
-      },
-    });
-    response.json({ message: 'updated' });
-
-    //const updateEmail =
-    await prisma.user.update({
-      where: {
-        id: request.params.id,
-      },
-      data: {
-        email: request.body.email,
-      },
-    });
+    const bodyData = _.pick(request.body, ['name', 'email']);
+    if (_.has(bodyData, 'name')) {
+      await prisma.user.update({
+        where: {
+          id: request.params.id,
+        },
+        data: {
+          name: request.body.name,
+        },
+      });
+      response.json({
+        message: `Successfully updated user name to ${request.body.name}`,
+      });
+    } else if (_.has(bodyData, 'email')) {
+      await prisma.user.update({
+        where: {
+          id: request.params.id,
+        },
+        data: {
+          email: request.body.email,
+        },
+      });
+      response.json({
+        message: `Successfully updated user Email to ${request.body.email}`,
+      });
+    } else {
+      throw new RequestError(
+        'Invalid fields provided; Can not update this field'
+      );
+    }
   } catch (error) {
     next(error);
     return;
@@ -88,18 +81,20 @@ router.delete('/:id', async (request, response, next) => {
       },
     });
     if (!testUser) {
-      throw new RequestError('User not found with ID');
+      throw new RequestError(`User not found with ID${request.params.id}`);
     }
-    //const user =
+    const username = testUser.name;
+
     await prisma.user.delete({
       where: {
         id: request.params.id,
       },
     });
-    response.json({ message: 'deletion successful' });
+    response.json({
+      message: `Deletion of user: ${username} successful`,
+    });
   } catch (error) {
     next(error);
-    return;
   }
 });
 
