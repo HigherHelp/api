@@ -6,4 +6,4 @@ export default express
   .Router()
   .use('/sample', sampleRoutes)
   .use('/example', sampleRoutes)
-  .use('/user', userRoutes);
+  .use('/users', userRoutes);

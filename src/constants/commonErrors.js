@@ -84,3 +84,15 @@ export class EmailServiceError extends Error {
     this.statusCode = 500;
   }
 }
+
+Object.freeze(EmailServiceError.prototype);
+
+export class NotFoundError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'NotFoundError';
+    this.statusCode = 404;
+  }
+}
+
+Object.freeze(NotFoundError.prototype);
