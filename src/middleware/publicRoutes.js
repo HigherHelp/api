@@ -1,4 +1,4 @@
-import _ from 'lodash-es';
+import _ from 'lodash';
 
 export default async (request, response, next) => {
   let route = request.path;
