@@ -2,7 +2,7 @@ import jwt from '../tools/jwt.js';
 import AuthTypes from '../constants/authTypes.js';
 import Prisma from '../tools/prisma.js';
 import { AuthenticationError } from '../constants/commonErrors.js';
-import _ from 'lodash-es';
+import _ from 'lodash';
 
 export default {
   getSignedRefreshToken,

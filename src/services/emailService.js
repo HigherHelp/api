@@ -1,4 +1,4 @@
-import _ from 'lodash-es';
+import _ from 'lodash';
 import validator from 'validator';
 import dotenv from 'dotenv';
 import formData from 'form-data';
