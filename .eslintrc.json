@@ -18,7 +18,8 @@
   "settings": {},
   "rules": {
     "prettier/prettier": [
-      "error",
+      // We run prettier on save and on commit, no need to highlight it as an error
+      "off",
       {
         "endOfLine": "auto"
       }

@@ -10,7 +10,8 @@
     "lint": "eslint --ext=.js --ignore-path=.gitignore src",
     "lint:fix": "yarn run lint --fix",
     "format": "prettier --write --ignore-path=.gitignore .",
-    "db": "yarn prisma db push && yarn prisma studio"
+    "db": "yarn prisma db push && yarn prisma studio",
+    "seed": "yarn prisma db seed"
   },
   "repository": {
     "type": "git",
@@ -39,6 +40,7 @@
     "winston": "^3.13.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "eslint": "^8.33.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "8.5.0",
@@ -62,6 +64,9 @@
   },
   "lint-staged": {
     "*.{js,jsx}": "eslint --fix"
+  },
+  "prisma": {
+    "seed": "node prisma/seed/index.js"
   },
   "volta": {
     "node": "22.2.0",
