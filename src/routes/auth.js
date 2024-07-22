@@ -9,14 +9,14 @@ const router = express.Router();
 router.post('/signup', async (request, response, next) => {
   try {
     const userEmail = request.body.email;
-    if (!userEmail || !validator.isEmail(userEmail)) {
+    if (!userEmail || !userEmail.trim() || !validator.isEmail(userEmail)) {
       throw new RequestError('Must provide a valid email');
     }
     if (!request.body.name) {
       throw new RequestError('Must provide a valid name');
     }
     const userPassword = request.body.password;
-    if (!userPassword) {
+    if (!userPassword || !userPassword.trim()) {
       throw new RequestError('Must provide a valid password');
     }
 
