@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import Prisma from '../tools/prisma.js';
 import validator from 'validator';
 import { RequestError } from '../constants/commonErrors.js';
+import tokenService from '../services/tokenService.js';
 
 const router = express.Router();
 
@@ -40,7 +41,6 @@ router.post('/signup', async (request, response, next) => {
       },
     });
 
-    // respond with a success message
     response.json({
       message: 'Created user in database!',
       user: newUser,
@@ -67,15 +67,16 @@ router.post('/signin', async (request, response, next) => {
         email: userEmail,
       },
     });
-
-    if (!user) {
-      throw new RequestError('Invalid email or password');
-    }
-
     const passwordMatch = await bcrypt.compare(userPassword, user.password);
-    if (!passwordMatch) {
+    if (!user && !passwordMatch) {
       throw new RequestError('Invalid email or password');
     }
+
+    const accessToken = await tokenService.createAccessToken(user);
+    const refreshToken = await tokenService.getSignedRefreshToken({
+      request,
+      user,
+    });
 
     response.json({
       message: 'Successfully signed in!',
@@ -84,6 +85,8 @@ router.post('/signin', async (request, response, next) => {
         name: user.name,
         email: user.email,
       },
+      accessToken: accessToken,
+      refreshToken: refreshToken,
     });
   } catch (error) {
     next(error);
