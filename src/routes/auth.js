@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import Prisma from '../tools/prisma.js';
 import validator from 'validator';
 import { RequestError } from '../constants/commonErrors.js';
+import jwt from '../tools/jwt.js';
 
 const router = express.Router();
 
@@ -49,5 +50,37 @@ router.post('/signup', async (request, response, next) => {
     next(error);
   }
 });
+
+router.post('/signout', async (request, response, next) => {
+  try {
+    const refreshToken =
+      request.body.refreshToken || request.cookies.refreshToken;
+
+    if (!refreshToken) {
+      throw new RequestError('No refresh token provided');
+    }
+
+    let decoded;
+    try {
+      decoded = jwt.verify(refreshToken, process.env.JWT_SECRET);
+    } catch {
+      throw new RequestError('Invalid refresh token');
+    }
+
+    await Prisma.refreshToken.deleteMany({
+      where: {
+        token: refreshToken,
+        userId: decoded.userId,
+      },
+    });
+
+    response.json({
+      message: 'Signed out successfully!',
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 export default router;
