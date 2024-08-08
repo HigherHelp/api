@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import Prisma from '../tools/prisma.js';
 import validator from 'validator';
 import { RequestError } from '../constants/commonErrors.js';
+import jwt from '../tools/jwt.js';
 
 const router = express.Router();
 
@@ -40,7 +41,6 @@ router.post('/signup', async (request, response, next) => {
       },
     });
 
-    // respond with a success message
     response.json({
       message: 'Created user in database!',
       user: newUser,
@@ -49,5 +49,24 @@ router.post('/signup', async (request, response, next) => {
     next(error);
   }
 });
+
+router.post('/signout', async (request, response, next) => {
+  try {
+    const refreshTokenInfo = await jwt.verify(request.body.refreshToken);
+
+    await Prisma.refreshTokens.delete({
+      where: {
+        id: refreshTokenInfo?.refreshTokenId,
+      },
+    });
+
+    response.json({
+      message: 'Signed out successfully!',
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 export default router;
