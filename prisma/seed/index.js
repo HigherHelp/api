@@ -16,10 +16,12 @@ async function main() {
   for (let i = 0; i < 10; i++) {
     const email = faker.internet.email();
     const name = faker.person.fullName();
+    const password = faker.internet.password();
     const user = await prisma.user.create({
       data: {
         email,
         name,
+        password,
       },
     });
     users.push(user);
