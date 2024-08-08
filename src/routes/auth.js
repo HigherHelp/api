@@ -41,7 +41,6 @@ router.post('/signup', async (request, response, next) => {
       },
     });
 
-    // respond with a success message
     response.json({
       message: 'Created user in database!',
       user: newUser,
@@ -53,24 +52,11 @@ router.post('/signup', async (request, response, next) => {
 
 router.post('/signout', async (request, response, next) => {
   try {
-    const refreshToken =
-      request.body.refreshToken || request.cookies.refreshToken;
+    const refreshTokenInfo = await jwt.verify(request.body.refreshToken);
 
-    if (!refreshToken) {
-      throw new RequestError('No refresh token provided');
-    }
-
-    let decoded;
-    try {
-      decoded = jwt.verify(refreshToken, process.env.JWT_SECRET);
-    } catch {
-      throw new RequestError('Invalid refresh token');
-    }
-
-    await Prisma.refreshToken.deleteMany({
+    await Prisma.refreshTokens.delete({
       where: {
-        token: refreshToken,
-        userId: decoded.userId,
+        id: refreshTokenInfo?.refreshTokenId,
       },
     });
 
