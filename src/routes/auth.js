@@ -69,7 +69,7 @@ router.post('/forgot-password', async (request, response, next) => {
     });
 
     if (user) {
-      //create jwt with payload of email
+
       const resetToken = jwt.sign(
         {
           email: user.email,
@@ -77,9 +77,8 @@ router.post('/forgot-password', async (request, response, next) => {
         },
         '1h'
       );
-      //create message to send to user email
       const message = `Hello ${user.name},\n\nPlease click the link below to reset your password:\n\nhttps://app.hireu.tech/reset-password?token=${resetToken}\n\nIf you didn't expect this email, please contact us at security@hireu.tech`;
-      //send user an email
+
       sendEmail({
         to: user.email,
         subject: 'Reset Password',
