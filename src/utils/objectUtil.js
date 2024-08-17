@@ -19,7 +19,7 @@ function recursivelyFinalizeAllPropertiesIn(object) {
       recursivelyFinalizeAllPropertiesIn(property);
     } else if (typeof property === 'function') {
       property.toString = () => {
-        return `${key} --- ConnectOrlando`;
+        return `${key} --- HireU`;
       };
     }
   }

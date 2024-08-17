@@ -7,6 +7,7 @@ import jwt from '../tools/jwt.js';
 import prisma from '../tools/prisma.js';
 import { sendEmail } from '../services/emailService.js';
 import tokenService from '../services/tokenService.js';
+import authTypes from '../constants/authTypes.js';
 
 const router = express.Router();
 
@@ -54,12 +55,12 @@ router.post('/signup', async (request, response, next) => {
 });
 
 router.post('/forgot-password', async (request, response, next) => {
+  const userEmail = request.body.email;
   try {
-    if (
-      !request.body.email.trim() ||
-      !validator.isEmail(request.body.email.trim())
-    ) {
-      throw new RequestError('invalid email');
+    if (!userEmail?.trim() || !validator.isEmail(userEmail.trim())) {
+      throw new RequestError(
+        'Invalid email received. Please try again with a valid email.'
+      );
     }
 
     const user = await prisma.user.findUnique({
@@ -69,11 +70,10 @@ router.post('/forgot-password', async (request, response, next) => {
     });
 
     if (user) {
-
       const resetToken = jwt.sign(
         {
           email: user.email,
-          type: 'resetJWT',
+          type: authTypes.RESETPASSWORD,
         },
         '1h'
       );
@@ -87,7 +87,7 @@ router.post('/forgot-password', async (request, response, next) => {
     }
     response.json({
       message:
-        'If email registered with system, reset password link was successfully sent',
+        'If the email is registered in the system, the reset password link will be sent',
     });
   } catch (error) {
     next(error);
@@ -95,11 +95,13 @@ router.post('/forgot-password', async (request, response, next) => {
 });
 
 router.post('/reset-password', async (request, response, next) => {
-  const resetJWT = request.body.token;
+  const resetJWT = request.body.resetPasswordToken;
   try {
     const jwtData = await jwt.verify(resetJWT);
     if (!jwtData) {
-      throw new RequestError('Invalid JWT');
+      throw new RequestError(
+        'Invalid token received. Please try again with a valid resetPasswordToken.'
+      );
     }
     const newPassword = request.body.password;
     const passwordHash = await bcrypt.hash(newPassword, 10);
