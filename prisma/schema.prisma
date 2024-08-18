@@ -18,6 +18,8 @@ model User {
   updatedAt     DateTime        @default(now()) @updatedAt
   name          String?
   RefreshTokens RefreshTokens[]
+  University    University?     @relation(fields: [universityId], references: [id])
+  universityId  String?         @db.Uuid
 }
 
 model RefreshTokens {
@@ -27,4 +29,10 @@ model RefreshTokens {
   userAgent String?
   userId    String?  @db.Uuid
   User      User?    @relation(fields: [userId], references: [id])
+}
+
+model University {
+  id      String @id @default(uuid()) @db.Uuid
+  name    String @unique
+  student User[]
 }
