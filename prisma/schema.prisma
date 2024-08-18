@@ -34,5 +34,5 @@ model RefreshTokens {
 model University {
   id      String @id @default(uuid()) @db.Uuid
   name    String @unique
-  student User[]
+  students User[]
 }

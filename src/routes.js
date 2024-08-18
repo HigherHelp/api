@@ -11,4 +11,4 @@ export default express
   // register them
   .use('/auth', authRoutes)
   .use('/users', userRoutes)
-  .use('/university', universityRoutes);
+  .use('/universities', universityRoutes);

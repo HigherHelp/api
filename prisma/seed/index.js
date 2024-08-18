@@ -12,7 +12,7 @@ async function main() {
   await clearDatabase();
   const users = [];
   const refreshTokens = [];
-  const university = [];
+  const universities = [];
 
   for (let i = 0; i < 10; i++) {
     const universityList = ['Columbia', 'MIT', 'NYIT', 'NYU'];
@@ -28,7 +28,7 @@ async function main() {
           name: uniName,
         },
       });
-      university.push(existingUni);
+      universities.push(existingUni);
     }
 
     const email = faker.internet.email();
