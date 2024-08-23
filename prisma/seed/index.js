@@ -6,22 +6,42 @@ const prisma = new PrismaClient();
 async function clearDatabase() {
   await prisma.refreshTokens.deleteMany();
   await prisma.user.deleteMany();
+  await prisma.university.deleteMany();
 }
 
 async function main() {
   await clearDatabase();
   const users = [];
   const refreshTokens = [];
+  const universities = [];
 
   for (let i = 0; i < 10; i++) {
+    const universityList = ['Columbia', 'MIT', 'NYIT', 'NYU'];
+    const uniName = universityList[faker.number.int({ min: 0, max: 3 })];
+    let existingUni = await prisma.university.findUnique({
+      where: {
+        name: uniName,
+      },
+    });
+    if (!existingUni) {
+      existingUni = await prisma.university.create({
+        data: {
+          name: uniName,
+        },
+      });
+      universities.push(existingUni);
+    }
+
     const email = faker.internet.email();
     const name = faker.person.fullName();
     const password = faker.internet.password();
+    const universityId = existingUni.id;
     const user = await prisma.user.create({
       data: {
         email,
         name,
         password,
+        universityId,
       },
     });
     users.push(user);
